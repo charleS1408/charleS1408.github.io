@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Payroll System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .payroll {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Payroll System</h1>
+    <div class="payroll">
+        <h2>Employee Details</h2>
+        <label for="employee-name">Employee Name:</label>
+        <input type="text" id="employee-name" placeholder="Enter employee name">
+
+        <label for="hours-worked">Hours Worked:</label>
+        <input type="number" id="hours-worked" placeholder="Enter hours worked" min="0">
+
+        <label for="hourly-rate">Hourly Rate (₱):</label>
+        <input type="number" id="hourly-rate" placeholder="Enter hourly rate" min="0">
+
+        <button onclick="calculatePayroll()">Calculate Payroll</button>
+        <div class="result" id="payroll-result"></div>
+    </div>
+
+    <script>
+        function calculatePayroll() {
+            const name = document.getElementById('employee-name').value.trim();
+            const hoursWorked = parseFloat(document.getElementById('hours-worked').value);
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
+
+            // Validate inputs
+            if (!name) {
+                alert("Please enter the employee's name.");
+                return;
+            }
+            if (isNaN(hoursWorked) || hoursWorked < 0) {
+                alert("Please enter a valid number of hours worked.");
+                return;
+            }
+            if (isNaN(hourlyRate) || hourlyRate < 0) {
+                alert("Please enter a valid hourly rate.");
+                return;
+            }
+
+            // Calculate gross pay
+            const grossPay = hoursWorked * hourlyRate;
+
+            // Display the result
+            document.getElementById('payroll-result').innerHTML = `
+                Employee Name: ${name} <br>
+                Hours Worked: ${hoursWorked} <br>
+                Hourly Rate: ₱${hourlyRate.toFixed(2)} <br>
+                <strong>Gross Pay: ₱${grossPay.toFixed(2)}</strong>
+            `;
+        }
+    </script>
+</body>
+</html>

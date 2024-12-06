@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .converter {
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, button {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unit Conversion</h1>
+
+    <div class="converter">
+        <h2>Temperature Conversion</h2>
+        <label for="temp-value">Enter Temperature:</label>
+        <input type="number" id="temp-value" placeholder="Enter value">
+        <select id="temp-unit">
+            <option value="CtoF">Celsius to Fahrenheit</option>
+            <option value="FtoC">Fahrenheit to Celsius</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <p id="temp-result"></p>
+    </div>
+
+    <div class="converter">
+        <h2>Length Conversion</h2>
+        <label for="length-value">Enter Length:</label>
+        <input type="number" id="length-value" placeholder="Enter value">
+        <select id="length-unit">
+            <option value="MtoF">Meters to Feet</option>
+            <option value="FtoM">Feet to Meters</option>
+        </select>
+        <button onclick="convertLength()">Convert</button>
+        <p id="length-result"></p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const value = parseFloat(document.getElementById('temp-value').value);
+            const unit = document.getElementById('temp-unit').value;
+            let result = '';
+
+            if (isNaN(value)) {
+                result = 'Please enter a valid number.';
+            } else if (unit === 'CtoF') {
+                result = `${value}°C is ${(value * 9/5 + 32).toFixed(2)}°F`;
+            } else if (unit === 'FtoC') {
+                result = `${value}°F is ${((value - 32) * 5/9).toFixed(2)}°C`;
+            }
+
+            document.getElementById('temp-result').textContent = result;
+        }
+
+        function convertLength() {
+            const value = parseFloat(document.getElementById('length-value').value);
+            const unit = document.getElementById('length-unit').value;
+            let result = '';
+
+            if (isNaN(value)) {
+                result = 'Please enter a valid number.';
+            } else if (unit === 'MtoF') {
+                result = `${value} meters is ${(value * 3.28084).toFixed(2)} feet`;
+            } else if (unit === 'FtoM') {
+                result = `${value} feet is ${(value / 3.28084).toFixed(2)} meters`;
+            }
+
+            document.getElementById('length-result').textContent = result;
+        }
+    </script>
+</body>
+</html>
